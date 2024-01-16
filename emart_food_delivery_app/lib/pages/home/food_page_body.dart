@@ -79,7 +79,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ),
               Container(
                 margin: const EdgeInsets.only(bottom: 3),
-                child: BigText(text: ".",color: Colors.black26,),
+                child: BigText(
+                  text: ".",
+                  color: Colors.black26,
+                ),
               ),
               SizedBox(
                 width: Dimensions.width10,
@@ -91,38 +94,93 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ],
           ),
         ),
-        
+
         // ignore: sized_box_for_whitespace
-        Container(
-          height: 1360,
-          child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            // shrinkWrap: true,
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20, bottom: Dimensions.height10),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.radius20,),
-                        color: Colors.white38,
-                        image: const DecorationImage(
+        ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: EdgeInsets.only(
+                  left: Dimensions.width20,
+                  right: Dimensions.width20,
+                  bottom: Dimensions.height10),
+              child: Row(
+                children: [
+                  Container(
+                    width: Dimensions.ListViewImgSize,
+                    height: Dimensions.ListViewImgSize,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        Dimensions.radius20,
+                      ),
+                      color: Colors.white38,
+                      image: const DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage(
-                          "assets/images/food0.png"
-                        )),
+                          image: AssetImage("assets/images/food0.png")),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: Dimensions.ListViewTextCountSize,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(Dimensions.radius20),
+                          bottomRight: Radius.circular(Dimensions.radius20),
+                        ),
+                        color: Colors.white,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: Dimensions.width10,
+                          right: Dimensions.width10,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            BigText(
+                                text: "Nutritious fruit meal in Viet Nam"),
+                            SizedBox(
+                              height: Dimensions.height10,
+                            ),
+                            SmallText(
+                                text: "With Vietnamese characteristics"),
+                            SizedBox(
+                              height: Dimensions.height10,
+                            ),
+                            Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconAndTextWidget(
+                                  icon: Icons.circle_sharp,
+                                  text: "Normal",
+                                  iconColor: AppColors.iconColor1,
+                                ),
+                                IconAndTextWidget(
+                                  icon: Icons.location_on,
+                                  text: "1.7km",
+                                  iconColor: AppColors.mainColor,
+                                ),
+                                IconAndTextWidget(
+                                  icon: Icons.access_time_rounded,
+                                  text: "32 min",
+                                  iconColor: AppColors.iconColor2,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ],
-                ),
-              );
-          },),
+                  ),
+                ],
+              ),
+            );
+          },
         )
-        
       ],
     );
   }
@@ -173,28 +231,32 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           alignment: Alignment.bottomCenter,
           child: Container(
             height: Dimensions.pageViewTextContainer,
-            margin: EdgeInsets.only(left: Dimensions.width30, right: Dimensions.width30, bottom: Dimensions.height30),
+            margin: EdgeInsets.only(
+                left: Dimensions.width30,
+                right: Dimensions.width30,
+                bottom: Dimensions.height30),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius20),
-                color: AppColors.whiteColor,
-                boxShadow: [
-                  const BoxShadow(
-                    color: Color(0xffe8e8e8),
-                    blurRadius: 5.0,
-                    offset: Offset(0, 5),
-                  ),
-                  BoxShadow(
-                    color: AppColors.whiteColor,
-                    offset: const Offset(-5, 0),
-                  ),
-                  BoxShadow(
-                    color: AppColors.whiteColor,
-                    offset: Offset(5, 0),
-                  )
-                ],
+              borderRadius: BorderRadius.circular(Dimensions.radius20),
+              color: AppColors.whiteColor,
+              boxShadow: [
+                const BoxShadow(
+                  color: Color(0xffe8e8e8),
+                  blurRadius: 5.0,
+                  offset: Offset(0, 5),
                 ),
+                BoxShadow(
+                  color: AppColors.whiteColor,
+                  offset: const Offset(-5, 0),
+                ),
+                BoxShadow(
+                  color: AppColors.whiteColor,
+                  offset: Offset(5, 0),
+                )
+              ],
+            ),
             child: Container(
-              padding: EdgeInsets.only(top: Dimensions.height15, left: 15, right: 15),
+              padding: EdgeInsets.only(
+                  top: Dimensions.height15, left: 15, right: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -1,4 +1,4 @@
-import 'package:emart_food_delivery_app/home/food_page_body.dart';
+import 'package:emart_food_delivery_app/pages/home/food_page_body.dart';
 import 'package:emart_food_delivery_app/utils/colors.dart';
 import 'package:emart_food_delivery_app/utils/dimensions.dart';
 import 'package:emart_food_delivery_app/widgets/big_text.dart';
