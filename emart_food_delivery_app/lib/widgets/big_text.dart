@@ -1,3 +1,4 @@
+import 'package:emart_food_delivery_app/utils/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 
 // ignore: must_be_immutable
@@ -10,7 +11,7 @@ class BigText extends StatelessWidget {
     super.key,
     this.color = const Color(0xff332d2b),
     required this.text,
-    this.size = 20,
+    this.size = 0,
     this.overFlow = TextOverflow.ellipsis
   });
 
@@ -23,7 +24,7 @@ class BigText extends StatelessWidget {
       style: TextStyle(
         fontFamily: 'Roboto',
         color: color,
-        fontSize: size,
+        fontSize: size == 0 ? Dimensions.font20 : size,
         fontWeight: FontWeight.w500,
       ),
     );
