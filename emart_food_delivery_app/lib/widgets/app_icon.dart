@@ -1,3 +1,4 @@
+import 'package:emart_food_delivery_app/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class AppIcon extends StatelessWidget {
@@ -5,7 +6,6 @@ class AppIcon extends StatelessWidget {
   final Color backgroundColor;
   final Color iconColor;
   final double size;
-
 
   AppIcon({
     super.key,
@@ -17,6 +17,18 @@ class AppIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(size / 2),
+        color: backgroundColor,
+      ),
+      child: Icon(
+        icon,
+        color: iconColor,
+        size: Dimensions.iconSize16,
+      ),
+    );
   }
 }
