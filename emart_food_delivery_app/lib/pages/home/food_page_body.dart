@@ -1,6 +1,9 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:emart_food_delivery_app/controllers/popular_product_controller.dart';
+import 'package:emart_food_delivery_app/controllers/recommended_product_controller.dart';
 import 'package:emart_food_delivery_app/models/products_model.dart';
+import 'package:emart_food_delivery_app/pages/food/popular_food_detail.dart';
+import 'package:emart_food_delivery_app/routes/route_helper.dart';
 import 'package:emart_food_delivery_app/utils/app_constants.dart';
 import 'package:emart_food_delivery_app/utils/colors.dart';
 import 'package:emart_food_delivery_app/utils/dimensions.dart';
@@ -52,12 +55,17 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           return popularProducts.isLoaded ? Container(
           // color: Colors.redAccent,
           height: Dimensions.pageView,
-          child: PageView.builder(
-            controller: pageController,
-            itemCount: popularProducts.popularProductList.length,
-            itemBuilder: (context, position) {
-              return _buildPageItem(position, popularProducts.popularProductList[position]);
+          child: GestureDetector(
+            onTap: () {
+              Get.toNamed(RouteHelper.popularFood);
             },
+            child: PageView.builder(
+              controller: pageController,
+              itemCount: popularProducts.popularProductList.length,
+              itemBuilder: (context, position) {
+                return _buildPageItem(position, popularProducts.popularProductList[position]);
+              },
+            ),
           ),
           ) : CircularProgressIndicator(
             color: AppColors.mainColor,
@@ -107,12 +115,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ],
           ),
         ),
-
-        // ignore: sized_box_for_whitespace
-        ListView.builder(
+        GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
+          return recommendedProduct.isLoaded?ListView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: 10,
+          itemCount: recommendedProduct.recommendedProductList.length,
           itemBuilder: (context, index) {
             return Container(
               margin: EdgeInsets.only(
@@ -129,9 +136,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         Dimensions.radius20,
                       ),
                       color: Colors.white38,
-                      image: const DecorationImage(
+                      image:  DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage("assets/images/food0.png")),
+                          image: NetworkImage(
+                  AppConstants.BASE_URL+AppConstants.UPLOAD_URL+recommendedProduct.recommendedProductList[index].img!
+                ),),
                     ),
                   ),
                   Expanded(
@@ -154,12 +163,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             BigText(
-                                text: "Nutritious fruit meal in Viet Nam"),
+                                text: recommendedProduct.recommendedProductList[index].name!),
                             SizedBox(
                               height: Dimensions.height10,
                             ),
                             SmallText(
-                                text: "With Vietnamese characteristics"),
+                                text:" recommendedProduct"),
                             SizedBox(
                               height: Dimensions.height10,
                             ),
@@ -194,6 +203,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             );
           },
         )
+        :CircularProgressIndicator(
+          color: AppColors.mainColor,
+        );
+        }),
       ],
     );
   }
@@ -239,7 +252,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  AppConstants.BASE_URL+"/uploads/"+popularProduct.img!
+                  AppConstants.BASE_URL+AppConstants.UPLOAD_URL+popularProduct.img!
                 )),
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:emart_food_delivery_app/pages/home/main_food_page.dart';
 import 'package:emart_food_delivery_app/utils/colors.dart';
 import 'package:emart_food_delivery_app/utils/dimensions.dart';
 import 'package:emart_food_delivery_app/widgets/app_column.dart';
@@ -9,6 +10,7 @@ import 'package:emart_food_delivery_app/widgets/icon_and_text_wiget.dart';
 // ignore: unused_import
 import 'package:emart_food_delivery_app/widgets/small_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   const PopularFoodDetail({super.key});
@@ -16,7 +18,6 @@ class PopularFoodDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Stack(
         children: [
           Positioned(
@@ -42,52 +43,96 @@ class PopularFoodDetail extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.arrow_back_ios),
+                GestureDetector(
+                  child: AppIcon(icon: Icons.arrow_back_ios),
+                  onTap: (){
+                    Get.to(()=>const MainFoodPage());
+                  },
+                  ),
                 AppIcon(icon: Icons.shopping_cart_outlined),
               ],
             ),
           ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            top: Dimensions.popularFoodImgSize - 20,
-            child: Container(
-              padding: EdgeInsets.only(
-                left: Dimensions.width20,
-                right: Dimensions.width20,
-                top: Dimensions.height20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(Dimensions.radius20),
-                  topRight: Radius.circular(Dimensions.radius20),
-                ),
-                color: Colors.white,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const AppColumn(text: "Phở NBPT"),
-                  SizedBox(
-                    height: Dimensions.height20,
+          Padding(
+            padding: EdgeInsets.only(top: Dimensions.popularFoodImgSize),
+            child: SingleChildScrollView(
+              child: Positioned(
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: EdgeInsets.only(
+                    left: Dimensions.width20,
+                    right: Dimensions.width20,
+                    top: Dimensions.height20,
                   ),
-                  BigText(text: "Introduce"),
-                  SizedBox(
-                    height: Dimensions.height20,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    color: Colors.white,
                   ),
-                  const Expanded(
-                    child: SingleChildScrollView(
-                      child: ExpandableTextWidget(
-                        text:
-                            "Phở NBPT is a famous dish in Viet Nam. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc.",
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BigText(text: "Vietnamese traditional pho", size: Dimensions.font26,),
+                      SizedBox(
+                        height: Dimensions.height10,
                       ),
-                    ),
+                      Row(
+                        children: [
+                          Wrap(
+                            children: List.generate(5, (index) {
+                              return Icon(
+                                Icons.star,
+                                color: AppColors.mainColor,
+                                size: 15,
+                              );
+                            }),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SmallText(text: '4.5'),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SmallText(text: '1745'),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SmallText(text: 'comments')
+                        ],
+                      ),
+                  
+                      SizedBox(
+                        height: Dimensions.height20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconAndTextWidget(
+                            icon: Icons.circle_sharp,
+                            text: "Normal",
+                            iconColor: AppColors.iconColor1,
+                          ),
+                          IconAndTextWidget(
+                            icon: Icons.location_on,
+                            text: "1.7km",
+                            iconColor: AppColors.mainColor,
+                          ),
+                          IconAndTextWidget(
+                            icon: Icons.access_time_rounded,
+                            text: "32 min",
+                            iconColor: AppColors.iconColor2,
+                          ),
+                        ],
+                      ),
+                      ExpandableTextWidget(text: "Phở là một món ăn truyền thống của Việt Nam, được xem là món ăn tiêu biểu nhất của ẩm thực Việt Nam. Phở có nguồn gốc từ tỉnh Nam Định, sau đó lan rộng ra khắp cả nước và trở nên phổ biến trên thế giới.Thành phần chính của phở là bánh phở, nước dùng và thịt bò hoặc thịt gà. Nước dùng của phở được ninh từ xương bò hoặc xương gà trong nhiều giờ, tạo nên vị ngọt thanh, đậm đà. Thịt bò hoặc thịt gà được thái mỏng, chín tái hoặc chín kỹ tùy theo sở thích của mỗi người. Phở có hương vị thơm ngon, đậm đà, hấp dẫn. Đây là món ăn thích hợp cho mọi lứa tuổi, mọi hoàn cảnh. Phở có thể được ăn sáng, ăn trưa, ăn tối hoặc ăn đêm.Phở là món ăn mang đậm bản sắc văn hóa Việt Nam. Phở đã trở thành một biểu tượng của ẩm thực Việt Nam, được nhiều người trên thế giới yêu thích.")
+                    ]
                   ),
-                ],
+              ),
               ),
             ),
           ),
+          
         ],
       ),
       bottomNavigationBar: Container(
