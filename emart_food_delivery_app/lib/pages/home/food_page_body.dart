@@ -1,4 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:emart_food_delivery_app/controllers/popular_product_controller.dart';
+import 'package:emart_food_delivery_app/models/products_model.dart';
+import 'package:emart_food_delivery_app/utils/app_constants.dart';
 import 'package:emart_food_delivery_app/utils/colors.dart';
 import 'package:emart_food_delivery_app/utils/dimensions.dart';
 import 'package:emart_food_delivery_app/widgets/app_column.dart';
@@ -6,6 +9,7 @@ import 'package:emart_food_delivery_app/widgets/big_text.dart';
 import 'package:emart_food_delivery_app/widgets/icon_and_text_wiget.dart';
 import 'package:emart_food_delivery_app/widgets/small_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({super.key});
@@ -17,7 +21,9 @@ class FoodPageBody extends StatefulWidget {
 class _FoodPageBodyState extends State<FoodPageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currPageValue = 0.0;
+  // ignore: prefer_final_fields
   double _scaleFactor = 0.8;
+  // ignore: prefer_final_fields
   double _height = Dimensions.pageViewContainer;
   @override
   void initState() {
@@ -41,20 +47,26 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        GetBuilder<PopularProductController>(builder: (popularProducts) {
         // ignore: sized_box_for_whitespace
-        Container(
+          return popularProducts.isLoaded ? Container(
           // color: Colors.redAccent,
           height: Dimensions.pageView,
           child: PageView.builder(
             controller: pageController,
-            itemCount: 5,
+            itemCount: popularProducts.popularProductList.length,
             itemBuilder: (context, position) {
-              return _buildPageItem(position);
+              return _buildPageItem(position, popularProducts.popularProductList[position]);
             },
           ),
-        ),
-        new DotsIndicator(
-          dotsCount: 5,
+          ) : CircularProgressIndicator(
+            color: AppColors.mainColor,
+          );
+        },),
+        GetBuilder<PopularProductController>(builder: (popularProducts){
+        // ignore: unnecessary_new
+          return DotsIndicator(
+          dotsCount: popularProducts.popularProductList.isEmpty ? 1 : popularProducts.popularProductList.length,
           position: _currPageValue.toInt(),
           decorator: DotsDecorator(
             size: const Size.square(9.0),
@@ -64,8 +76,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               borderRadius: BorderRadius.circular(5.0),
             ),
           ),
-        ),
-
+        );
+        }),
         SizedBox(
           height: Dimensions.height30,
         ),
@@ -74,7 +86,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              BigText(text: "Popular"),
+              BigText(text: "Recommended"),
               SizedBox(
                 width: Dimensions.width10,
               ),
@@ -186,7 +198,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     );
   }
 
-  Widget _buildPageItem(int index) {
+  Widget _buildPageItem(int index, ProductModel popularProduct) {
+    // ignore: unnecessary_new
     Matrix4 matrix = new Matrix4.identity();
     if (index == _currPageValue.floor()) {
       var currScale = 1 - (_currPageValue - index) * (1 - _scaleFactor);
@@ -223,9 +236,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             color: index.isEven
                 ? const Color(0xff69c5df)
                 : const Color(0xff9294cc),
-            image: const DecorationImage(
+            image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/images/food0.png")),
+                image: NetworkImage(
+                  AppConstants.BASE_URL+"/uploads/"+popularProduct.img!
+                )),
           ),
         ),
         Align(
@@ -251,14 +266,14 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 ),
                 BoxShadow(
                   color: AppColors.whiteColor,
-                  offset: Offset(5, 0),
+                  offset: const Offset(5, 0),
                 )
               ],
             ),
             child: Container(
               padding: EdgeInsets.only(
-                  top: Dimensions.height15, left: 15, right: 15),
-              child: AppColumn(text: "Phở NBPT",),
+                  top: Dimensions.height15, left: 15, right: 15,),
+              child:  AppColumn(text: popularProduct.name!,),
             ),
           
           ),

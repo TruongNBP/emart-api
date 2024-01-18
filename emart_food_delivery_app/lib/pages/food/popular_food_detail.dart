@@ -4,7 +4,9 @@ import 'package:emart_food_delivery_app/widgets/app_column.dart';
 import 'package:emart_food_delivery_app/widgets/app_icon.dart';
 import 'package:emart_food_delivery_app/widgets/big_text.dart';
 import 'package:emart_food_delivery_app/widgets/exandable_text_widget.dart';
+// ignore: unused_import
 import 'package:emart_food_delivery_app/widgets/icon_and_text_wiget.dart';
+// ignore: unused_import
 import 'package:emart_food_delivery_app/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +25,7 @@ class PopularFoodDetail extends StatelessWidget {
             child: Container(
               width: double.maxFinite,
               height: Dimensions.popularFoodImgSize,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(
@@ -66,7 +68,7 @@ class PopularFoodDetail extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AppColumn(text: "Phở NBPT"),
+                  const AppColumn(text: "Phở NBPT"),
                   SizedBox(
                     height: Dimensions.height20,
                   ),
@@ -74,7 +76,7 @@ class PopularFoodDetail extends StatelessWidget {
                   SizedBox(
                     height: Dimensions.height20,
                   ),
-                  Expanded(
+                  const Expanded(
                     child: SingleChildScrollView(
                       child: ExpandableTextWidget(
                         text:
