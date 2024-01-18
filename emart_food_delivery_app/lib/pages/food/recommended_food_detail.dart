@@ -1,25 +1,34 @@
+import 'package:emart_food_delivery_app/controllers/recommended_product_controller.dart';
+import 'package:emart_food_delivery_app/routes/route_helper.dart';
+import 'package:emart_food_delivery_app/utils/app_constants.dart';
 import 'package:emart_food_delivery_app/utils/colors.dart';
 import 'package:emart_food_delivery_app/utils/dimensions.dart';
 import 'package:emart_food_delivery_app/widgets/app_icon.dart';
 import 'package:emart_food_delivery_app/widgets/big_text.dart';
 import 'package:emart_food_delivery_app/widgets/exandable_text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({super.key});
+  final int pageId;
+  const RecommendedFoodDetail({super.key, required this.pageId});
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 77,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear),
+                GestureDetector(child: AppIcon(icon: Icons.clear),onTap: () {
+                  Get.toNamed(RouteHelper.getInitial());
+                },),
                 AppIcon(icon: Icons.shopping_cart_outlined),
               ],
             ),
@@ -46,8 +55,8 @@ class RecommendedFoodDetail extends StatelessWidget {
             backgroundColor: AppColors.yellowColor,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/images/food0.png",
+              background: Image.network(
+                AppConstants.BASE_URL+AppConstants.UPLOAD_URL+product.img!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -58,9 +67,8 @@ class RecommendedFoodDetail extends StatelessWidget {
               children: [
                 Container(
                   // ignore: sort_child_properties_last
-                  child: const ExpandableTextWidget(
-                    text:
-                        "Phở NBPT is a famous dish in Viet Nam. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. Phở NBPT is a famous dish in Viet Nam. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc. It is a combination of many ingredients such as beef, chicken, pork, fish, shrimp, crab, squid, etc.",
+                  child: ExpandableTextWidget(
+                    text: product.description,
                   ),
                   margin: EdgeInsets.only(
                       left: Dimensions.width20, right: Dimensions.width20),
@@ -90,7 +98,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                   icon: Icons.remove,
                 ),
                 BigText(
-                  text: "\$12.88" + " x " + "0",
+                  text: "\$${product.price!} x 0",
                   color: AppColors.mainBlackColor,
                   size: Dimensions.font26,
                 ),

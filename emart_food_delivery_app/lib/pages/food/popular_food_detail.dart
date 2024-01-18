@@ -1,4 +1,6 @@
+import 'package:emart_food_delivery_app/controllers/popular_product_controller.dart';
 import 'package:emart_food_delivery_app/pages/home/main_food_page.dart';
+import 'package:emart_food_delivery_app/utils/app_constants.dart';
 import 'package:emart_food_delivery_app/utils/colors.dart';
 import 'package:emart_food_delivery_app/utils/dimensions.dart';
 import 'package:emart_food_delivery_app/widgets/app_column.dart';
@@ -13,10 +15,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({super.key});
+  final int pageId;
+  const PopularFoodDetail({super.key, required this.pageId});
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<PopularProductController>().popularProductList[pageId];
+    // print("page is id "+pageId.toString());
+    // print("product name is "+product.name.toString());
+
     return Scaffold(
       body: Stack(
         children: [
@@ -26,12 +33,12 @@ class PopularFoodDetail extends StatelessWidget {
             child: Container(
               width: double.maxFinite,
               height: Dimensions.popularFoodImgSize,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(
-                    "assets/images/food0.png",
-                  ),
+                  image: NetworkImage(
+                    AppConstants.BASE_URL+AppConstants.UPLOAD_URL+product.img!
+                  )
                 ),
               ),
             ),
@@ -72,7 +79,7 @@ class PopularFoodDetail extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      BigText(text: "Vietnamese traditional pho", size: Dimensions.font26,),
+                      BigText(text: product.name!, size: Dimensions.font26,),
                       SizedBox(
                         height: Dimensions.height10,
                       ),
@@ -125,7 +132,11 @@ class PopularFoodDetail extends StatelessWidget {
                           ),
                         ],
                       ),
-                      ExpandableTextWidget(text: "Phở là một món ăn truyền thống của Việt Nam, được xem là món ăn tiêu biểu nhất của ẩm thực Việt Nam. Phở có nguồn gốc từ tỉnh Nam Định, sau đó lan rộng ra khắp cả nước và trở nên phổ biến trên thế giới.Thành phần chính của phở là bánh phở, nước dùng và thịt bò hoặc thịt gà. Nước dùng của phở được ninh từ xương bò hoặc xương gà trong nhiều giờ, tạo nên vị ngọt thanh, đậm đà. Thịt bò hoặc thịt gà được thái mỏng, chín tái hoặc chín kỹ tùy theo sở thích của mỗi người. Phở có hương vị thơm ngon, đậm đà, hấp dẫn. Đây là món ăn thích hợp cho mọi lứa tuổi, mọi hoàn cảnh. Phở có thể được ăn sáng, ăn trưa, ăn tối hoặc ăn đêm.Phở là món ăn mang đậm bản sắc văn hóa Việt Nam. Phở đã trở thành một biểu tượng của ẩm thực Việt Nam, được nhiều người trên thế giới yêu thích.")
+                      BigText(text: "Introduce", size: Dimensions.font20,),
+                      SizedBox(
+                        height: Dimensions.height10,
+                      ),
+                      ExpandableTextWidget(text: product.description,)
                     ]
                   ),
               ),
@@ -196,7 +207,7 @@ class PopularFoodDetail extends StatelessWidget {
                 color: AppColors.mainColor,
               ),
               child: BigText(
-                text: "\$10 | Add to cart",
+                text: "\$${product.price!} | Add to cart",
                 color: Colors.white,
               ),
             ),
