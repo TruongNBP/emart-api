@@ -2,7 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:emart_food_delivery_app/controllers/popular_product_controller.dart';
 import 'package:emart_food_delivery_app/controllers/recommended_product_controller.dart';
 import 'package:emart_food_delivery_app/models/products_model.dart';
-import 'package:emart_food_delivery_app/pages/food/popular_food_detail.dart';
+// import 'package:emart_food_delivery_app/pages/food/popular_food_detail.dart';
 import 'package:emart_food_delivery_app/routes/route_helper.dart';
 import 'package:emart_food_delivery_app/utils/app_constants.dart';
 import 'package:emart_food_delivery_app/utils/colors.dart';
@@ -119,7 +119,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                Get.toNamed(RouteHelper.getRecommendedFood(index));
+                Get.toNamed(RouteHelper.getRecommendedFood(index, "home"));
               },
               child: Container(
                 margin: EdgeInsets.only(
@@ -245,7 +245,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         GestureDetector(
           onTap: () {
 
-            Get.toNamed(RouteHelper.getPopularFood(index));
+            Get.toNamed(RouteHelper.getPopularFood(index, "home"));
           },
           child: Container(
             height: Dimensions.pageViewContainer,

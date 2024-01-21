@@ -1,4 +1,4 @@
-import 'package:emart_food_delivery_app/utils/dimensions.dart';
+// import 'package:emart_food_delivery_app/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class AppIcon extends StatelessWidget {
