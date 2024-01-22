@@ -2,6 +2,7 @@
 import 'package:emart_food_delivery_app/controllers/cart_controller.dart';
 import 'package:emart_food_delivery_app/controllers/popular_product_controller.dart';
 import 'package:emart_food_delivery_app/controllers/recommended_product_controller.dart';
+import 'package:emart_food_delivery_app/pages/auth/sign_up_page.dart';
 // import 'package:emart_food_delivery_app/pages/cart/cart_page.dart';
 import 'package:emart_food_delivery_app/pages/home/main_food_page.dart';
 import 'package:emart_food_delivery_app/pages/splash/splash_page.dart';
@@ -29,12 +30,13 @@ class MyApp extends StatelessWidget {
       builder: (_){
         return GetBuilder<RecommendedProductController>(
           builder: (_){
-            return GetMaterialApp(
+            return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      home: SignUpPage(),
       // home: SplashScreen(),
-      initialRoute: RouteHelper.getSplashPage(),
-      getPages: RouteHelper.routes,
+      // initialRoute: RouteHelper.getSplashPage(),
+      // getPages: RouteHelper.routes,
     );
           },
           );
