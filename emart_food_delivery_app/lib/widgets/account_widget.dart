@@ -5,6 +5,7 @@ import 'package:emart_food_delivery_app/utils/dimensions.dart';
 import 'package:emart_food_delivery_app/widgets/app_icon.dart';
 import 'package:emart_food_delivery_app/widgets/big_text.dart';
 
+// ignore: must_be_immutable
 class AccountWidget extends StatelessWidget {
   AppIcon appIcon;
   BigText bigText;
@@ -21,6 +22,16 @@ class AccountWidget extends StatelessWidget {
           left: Dimensions.width20,
           top: Dimensions.width10,
           bottom: Dimensions.width10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 1,
+            offset: const Offset(0, 2),
+            color: Colors.grey.withOpacity(0.2),
+          )
+        ],
+      ),
       child: Row(
         children: [
           appIcon,
@@ -28,16 +39,6 @@ class AccountWidget extends StatelessWidget {
             width: Dimensions.width20,
           ),
           bigText
-        ],
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 1,
-            offset: Offset(0, 2),
-            color: Colors.grey.withOpacity(0.2),
-          )
         ],
       ),
     );

@@ -21,7 +21,7 @@ class CartHistory extends StatelessWidget {
   Widget build(BuildContext context) {
     var getCartHistoryList =
         Get.find<CartController>().getCartHistoryList().reversed.toList();
-    Map<String, int> cartItemsPerOrder = Map();
+    Map<String, int> cartItemsPerOrder = {};
 
     for (int i = 0; i < getCartHistoryList.length; i++) {
       if (cartItemsPerOrder.containsKey(getCartHistoryList[i].time)) {
@@ -78,7 +78,9 @@ class CartHistory extends StatelessWidget {
               ],
             ),
           ),
+          // ignore: no_leading_underscores_for_local_identifiers
           GetBuilder<CartController>(builder: (_cartController) {
+            // ignore: prefer_is_empty
             return _cartController.getCartHistoryList().length > 0
                 ? Expanded(
                     child: Container(
@@ -151,7 +153,7 @@ class CartHistory extends StatelessWidget {
                                                       )
                                                     : Container();
                                               })),
-                                          Container(
+                                          SizedBox(
                                             height: Dimensions.height20 * 4,
                                             child: Column(
                                               mainAxisAlignment:
@@ -164,6 +166,7 @@ class CartHistory extends StatelessWidget {
                                                   color: AppColors.titleColor,
                                                 ),
                                                 BigText(
+                                                  // ignore: prefer_interpolation_to_compose_strings
                                                   text: itemsPerOrder[i]
                                                           .toString() +
                                                       " Items",

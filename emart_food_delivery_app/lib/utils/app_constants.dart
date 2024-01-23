@@ -15,14 +15,20 @@ class AppConstants {
   // ignore: constant_identifier_names
   static const String UPLOAD_URL = "/uploads/";
 
+  // ignore: constant_identifier_names
   static const String REGISTRATION_URI = "/api/v1/auth/register";
+  // ignore: constant_identifier_names
   static const String LOGIN_URI = "/api/v1/auth/login";
 
   // ignore: constant_identifier_names
-  static const String TOKEN = "DBtoken";
+  static const String TOKEN = "";
+  // ignore: constant_identifier_names
   static const String PHONE = "";
+  // ignore: constant_identifier_names
   static const String PASSWORD= "";
+  // ignore: constant_identifier_names
   static const String CART_LIST = "cart-list";
+  // ignore: constant_identifier_names
   static const String CART_HISTORY_LIST = "cart-history-list";
 
 }

@@ -77,6 +77,7 @@ class CartController extends GetxController {
     var quantity = 0;
     if (_items.containsKey(product.id)) {
       _items.forEach((key, value) {
+        // ignore: unnecessary_null_comparison
         if (key == product.id && value != null) {
         quantity = value.quantity ?? 0;
       }
@@ -88,6 +89,7 @@ class CartController extends GetxController {
   int get totalItems{
     var totalQuantity = 0;
     _items.forEach((key, value) {
+      // ignore: unnecessary_null_comparison
       if (value != null) {
       totalQuantity += value.quantity ?? 0;
     }
@@ -152,6 +154,11 @@ set setItems(Map<int, CartModel> setItems){
 
 void addToCartList(){
   cartRepo.addToCartList(getItems);
+  update();
+}
+
+void clearCartHistory(){
+  cartRepo.clearCartHistory();
   update();
 }
 

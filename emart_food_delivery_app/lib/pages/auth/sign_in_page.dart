@@ -1,3 +1,4 @@
+import 'package:emart_food_delivery_app/base/custom_loader.dart';
 import 'package:emart_food_delivery_app/base/show_custom_snackbar.dart';
 import 'package:emart_food_delivery_app/controllers/auth_controller.dart';
 import 'package:emart_food_delivery_app/pages/auth/sign_up_page.dart';
@@ -17,10 +18,13 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var emailController = TextEditingController();
     var passController = TextEditingController();
-    void _login(AuthController authController){
+    var phoneController = TextEditingController();
+    // ignore: no_leading_underscores_for_local_identifiers
+    void _login(AuthController _authController){
       
       String password = passController.text.trim();
       String email = emailController.text.trim();
+      String phone = phoneController.text.trim();
 
       if(email.isEmpty){
         showCustomSnackBar("Type in your phone email address", title: "Email address");
@@ -32,12 +36,11 @@ class SignInPage extends StatelessWidget {
         showCustomSnackBar("Password must be at least 6 characters", title: "Password");
       }else{
         
-        authController.login(email, password).then((status){
+        _authController.login(email, password, phone).then((status){
           if (status.isSuccess) {
             Get.toNamed(RouteHelper.getInitial());
           }else{
-            // showCustomSnackBar(status.message);
-            Get.toNamed(RouteHelper.getInitial());
+            showCustomSnackBar(status.message);
           }
         });
       }
@@ -46,8 +49,9 @@ class SignInPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       body: GetBuilder<AuthController>(
+        // ignore: no_leading_underscores_for_local_identifiers
         builder: (authController){
-          return SingleChildScrollView(
+          return !authController.isLoading ? SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
@@ -99,6 +103,13 @@ class SignInPage extends StatelessWidget {
                 textController: emailController,
                 hintText: "Email",
                 icon: Icons.email),
+            SizedBox(
+              height: Dimensions.height20,
+            ),
+            AppTextField(
+                textController: phoneController,
+                hintText: "Phone",
+                icon: Icons.phone),
             SizedBox(
               height: Dimensions.height20,
             ),
@@ -177,7 +188,7 @@ class SignInPage extends StatelessWidget {
             ),
           ],
         ),
-      );
+      ):CustomLoader();
         },
       ),
     );

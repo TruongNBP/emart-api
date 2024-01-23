@@ -1,9 +1,13 @@
+import 'package:emart_food_delivery_app/controllers/auth_controller.dart';
+import 'package:emart_food_delivery_app/controllers/cart_controller.dart';
+import 'package:emart_food_delivery_app/routes/route_helper.dart';
 import 'package:emart_food_delivery_app/utils/colors.dart';
 import 'package:emart_food_delivery_app/utils/dimensions.dart';
 import 'package:emart_food_delivery_app/widgets/account_widget.dart';
 import 'package:emart_food_delivery_app/widgets/app_icon.dart';
 import 'package:emart_food_delivery_app/widgets/big_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
@@ -100,21 +104,31 @@ class AccountPage extends StatelessWidget {
                         iconColor: AppColors.whiteColor,
                         iconSize: Dimensions.height10 * 5 / 2,
                       ),
-                      bigText: BigText(text: "NBPT"),
+                      bigText: BigText(text: "Message"),
                     ),
                     SizedBox(
                       height: Dimensions.height20,
                     ),
-                    AccountWidget(
+                    GestureDetector(
+                      onTap: (){
+                        if (Get.find<AuthController>().userLoggedIn()) {
+                          Get.find<AuthController>().clearSharedData();
+                          Get.find<CartController>().clear();
+                          Get.find<CartController>().clearCartHistory();
+                          Get.offNamed(RouteHelper.getInitial()); 
+                        }
+                      },
+                      child: AccountWidget(
                       appIcon: AppIcon(
-                        icon: Icons.message_outlined,
+                        icon: Icons.logout,
                         backgroundColor: AppColors.iconColor2,
                         size: Dimensions.height10 * 5,
                         iconColor: AppColors.whiteColor,
                         iconSize: Dimensions.height10 * 5 / 2,
                       ),
-                      bigText: BigText(text: "NBPT"),
+                      bigText: BigText(text: "Log out"),
                     ),
+                    )
 
                   ],
                 ),

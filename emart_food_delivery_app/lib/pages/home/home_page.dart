@@ -1,10 +1,7 @@
 import 'package:emart_food_delivery_app/pages/account/account_page.dart';
-import 'package:emart_food_delivery_app/pages/auth/sign_in_page.dart';
-import 'package:emart_food_delivery_app/pages/auth/sign_up_page.dart';
 import 'package:emart_food_delivery_app/pages/cart/cart_history.dart';
 import 'package:emart_food_delivery_app/pages/home/main_food_page.dart';
 import 'package:emart_food_delivery_app/utils/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,10 +17,11 @@ class _HomePageState extends State<HomePage> {
 
 
   List pages = [
-    MainFoodPage(),
-    SignInPage(),
-    CartHistory(),
-    AccountPage()
+    const MainFoodPage(),
+    // ignore: avoid_unnecessary_containers
+    Container(child: const Text("History page"),),
+    const CartHistory(),
+    const AccountPage()
   ];
 
   void onTapNav(int index){

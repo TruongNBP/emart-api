@@ -24,6 +24,7 @@ class SignUpPage extends StatelessWidget {
       "f.png",
       "g.png"
     ];
+    // ignore: no_leading_underscores_for_local_identifiers
     void _registration(AuthController authController){
       
       String name = nameController.text.trim();
@@ -48,6 +49,7 @@ class SignUpPage extends StatelessWidget {
         SignUpBody signUpBody = SignUpBody(name: name, phone: phone, email: email, password: password);
         authController.registration(signUpBody).then((status){
           if (status.isSuccess) {
+            // ignore: avoid_print
             print("Success registration");
           }else{
             showCustomSnackBar(status.message);
@@ -58,9 +60,10 @@ class SignUpPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       body: GetBuilder<AuthController>(
+        // ignore: no_leading_underscores_for_local_identifiers
         builder: (_authController){
           return !_authController.isLoading?SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             SizedBox(
@@ -73,7 +76,7 @@ class SignUpPage extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: AppColors.whiteColor,
                   radius: 80,
-                  backgroundImage: AssetImage(
+                  backgroundImage: const AssetImage(
                     "assets/images/logo part 1.png",
                   ),
                 ),

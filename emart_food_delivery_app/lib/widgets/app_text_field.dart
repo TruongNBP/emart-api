@@ -2,6 +2,7 @@ import 'package:emart_food_delivery_app/utils/colors.dart';
 import 'package:emart_food_delivery_app/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class AppTextField extends StatelessWidget {
   final TextEditingController textController;
   final String hintText;
@@ -23,7 +24,7 @@ class AppTextField extends StatelessWidget {
                 BoxShadow(
                   blurRadius: 3,
                   spreadRadius: 1,
-                  offset: Offset(1, 1),
+                  offset: const Offset(1, 1),
                   color: Colors.grey.withOpacity(0.2)
                 ),
               ]

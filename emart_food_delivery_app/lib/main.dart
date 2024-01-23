@@ -2,7 +2,9 @@
 import 'package:emart_food_delivery_app/controllers/cart_controller.dart';
 import 'package:emart_food_delivery_app/controllers/popular_product_controller.dart';
 import 'package:emart_food_delivery_app/controllers/recommended_product_controller.dart';
+// ignore: unused_import
 import 'package:emart_food_delivery_app/pages/auth/sign_in_page.dart';
+// ignore: unused_import
 import 'package:emart_food_delivery_app/pages/splash/splash_page.dart';
 import 'package:emart_food_delivery_app/routes/route_helper.dart';
 
