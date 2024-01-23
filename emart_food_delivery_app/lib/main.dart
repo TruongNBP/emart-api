@@ -2,12 +2,15 @@
 import 'package:emart_food_delivery_app/controllers/cart_controller.dart';
 import 'package:emart_food_delivery_app/controllers/popular_product_controller.dart';
 import 'package:emart_food_delivery_app/controllers/recommended_product_controller.dart';
-import 'package:emart_food_delivery_app/pages/auth/sign_up_page.dart';
-// import 'package:emart_food_delivery_app/pages/cart/cart_page.dart';
-import 'package:emart_food_delivery_app/pages/home/main_food_page.dart';
+import 'package:emart_food_delivery_app/pages/auth/sign_in_page.dart';
 import 'package:emart_food_delivery_app/pages/splash/splash_page.dart';
-// import 'package:emart_food_delivery_app/pages/home/food_page_body.dart';
 import 'package:emart_food_delivery_app/routes/route_helper.dart';
+
+// import 'package:emart_food_delivery_app/pages/cart/cart_page.dart';
+
+
+// import 'package:emart_food_delivery_app/pages/home/food_page_body.dart';
+
 // import 'package:emart_food_delivery_app/pages/food/recommended_food_detail.dart';
 // import 'package:emart_food_delivery_app/pages/home/main_food_page.dart';
 import 'package:flutter/material.dart';
@@ -30,13 +33,13 @@ class MyApp extends StatelessWidget {
       builder: (_){
         return GetBuilder<RecommendedProductController>(
           builder: (_){
-            return const GetMaterialApp(
+            return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: SignUpPage(),
+      // home: SignInPage(),
       // home: SplashScreen(),
-      // initialRoute: RouteHelper.getSplashPage(),
-      // getPages: RouteHelper.routes,
+      initialRoute: RouteHelper.getSplashPage(),
+      getPages: RouteHelper.routes,
     );
           },
           );
